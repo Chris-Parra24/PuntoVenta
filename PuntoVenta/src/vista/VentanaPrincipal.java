@@ -72,6 +72,23 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JTextField txtTotal;
     private javax.swing.JPanel panelPedidoVenta;
     //fin de componentes de venta
+    //inicio de componentes de modificacion de productos
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscarProd;
+    private javax.swing.JPanel jPanelUpdate;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbDescripcion;
+    private javax.swing.JLabel lbIdentificador;
+    private javax.swing.JLabel lbInstruccion;
+    private javax.swing.JLabel lbPrecio;
+    private javax.swing.JLabel lbTitulo;
+    private javax.swing.JRadioButton rbActivo;
+    private javax.swing.JRadioButton rbInactivo;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtIdentificador1;
+    private javax.swing.JTextField txtIdentificador2;
+    private javax.swing.JTextField txtPrecio;
+    //fin de componentnes de modificacion de productos
     
     
 	//constructor
@@ -140,6 +157,24 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         lbTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         //****************************fin de componentes de la venta
+        
+        /*Componentes de mi modificacion de productos*/
+        jPanelUpdate = new javax.swing.JPanel();
+        lbTitulo = new javax.swing.JLabel();
+        lbInstruccion = new javax.swing.JLabel();
+        txtIdentificador1 = new javax.swing.JTextField();
+        btnBuscarProd = new javax.swing.JButton();
+        lbDescripcion = new javax.swing.JLabel();
+        lbPrecio = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        rbActivo = new javax.swing.JRadioButton();
+        rbInactivo = new javax.swing.JRadioButton();
+        lbIdentificador = new javax.swing.JLabel();
+        txtIdentificador2 = new javax.swing.JTextField();
+        btnActualizar = new javax.swing.JButton();
+        //fin de componentes de modificacion de productos
         
         //Cosas de mis ventana y del panel principal*******************************
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -321,6 +356,96 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         panelProductosRe.setVisible(false);
         
         //fin de registro de empleados y de productos **********************************
+        
+        /*Inicio de componentes de modificacion*/
+        jPanelUpdate.setBackground(java.awt.Color.lightGray);
+        jPanelUpdate.setLayout(null);
+
+        lbTitulo.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
+        lbTitulo.setForeground(new java.awt.Color(1, 1, 1));
+        lbTitulo.setText("Modificacion de producto");
+        jPanelUpdate.add(lbTitulo);
+        lbTitulo.setBounds(10, 10, 420, 60);
+
+        lbInstruccion.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        lbInstruccion.setForeground(java.awt.Color.black);
+        lbInstruccion.setText("Ingrese la clave del producto a modificar");
+        jPanelUpdate.add(lbInstruccion);
+        lbInstruccion.setBounds(100, 70, 450, 50);
+
+        txtIdentificador1.setBackground(java.awt.Color.white);
+        txtIdentificador1.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtIdentificador1.setForeground(java.awt.Color.black);
+        jPanelUpdate.add(txtIdentificador1);
+        txtIdentificador1.setBounds(110, 130, 180, 30);
+
+        btnBuscarProd.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btnBuscarProd.setText("Buscar");
+        jPanelUpdate.add(btnBuscarProd);
+        btnBuscarProd.setBounds(320, 130, 220, 30);
+
+        lbDescripcion.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        lbDescripcion.setForeground(java.awt.Color.black);
+        lbDescripcion.setText("Descripcion");
+        jPanelUpdate.add(lbDescripcion);
+        lbDescripcion.setBounds(160, 230, 110, 19);
+
+        lbPrecio.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        lbPrecio.setForeground(java.awt.Color.black);
+        lbPrecio.setText("Precio");
+        jPanelUpdate.add(lbPrecio);
+        lbPrecio.setBounds(160, 270, 80, 19);
+
+        txtDescripcion.setBackground(java.awt.Color.white);
+        txtDescripcion.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtDescripcion.setForeground(java.awt.Color.black);
+        txtDescripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanelUpdate.add(txtDescripcion);
+        txtDescripcion.setBounds(290, 230, 200, 31);
+
+        txtPrecio.setBackground(java.awt.Color.white);
+        txtPrecio.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtPrecio.setForeground(java.awt.Color.black);
+        txtPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanelUpdate.add(txtPrecio);
+        txtPrecio.setBounds(290, 270, 200, 31);
+        jPanelUpdate.add(jSeparator1);
+        jSeparator1.setBounds(30, 170, 610, 10);
+
+        rbActivo.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        rbActivo.setForeground(java.awt.Color.black);
+        rbActivo.setText("Activo");
+        jPanelUpdate.add(rbActivo);
+        rbActivo.setBounds(160, 330, 80, 23);
+
+        rbInactivo.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        rbInactivo.setForeground(java.awt.Color.black);
+        rbInactivo.setText("Inactivo");
+        jPanelUpdate.add(rbInactivo);
+        rbInactivo.setBounds(380, 330, 90, 23);
+
+        lbIdentificador.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        lbIdentificador.setForeground(java.awt.Color.black);
+        lbIdentificador.setText("ID");
+        jPanelUpdate.add(lbIdentificador);
+        lbIdentificador.setBounds(160, 195, 90, 19);
+
+        txtIdentificador2.setBackground(java.awt.Color.white);
+        txtIdentificador2.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtIdentificador2.setForeground(java.awt.Color.black);
+        txtIdentificador2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanelUpdate.add(txtIdentificador2);
+        txtIdentificador2.setBounds(290, 190, 200, 31);
+
+        btnActualizar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        jPanelUpdate.add(btnActualizar);
+        btnActualizar.setBounds(220, 380, 180, 35);
+        
+        this.panelPrincipal.add(this.jPanelUpdate);
+        this.jPanelUpdate.setBounds(200,200,660,440);
+        
+        /*Fin de componentes de modificacion*/
         
         //ventas***************************************
         panelVentas.setBackground(java.awt.Color.lightGray);
