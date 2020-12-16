@@ -22,6 +22,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JMenuItem opAltaEmpleado;
     private javax.swing.JMenuItem opBajaEmpleado;
     private javax.swing.JMenuItem opBajaProducto;
+    private javax.swing.JMenuItem opModificarProducto;
     private javax.swing.JPanel panelPrincipal;
     private Dimension tamañoPantalla;
     private Rectangle pantalla;
@@ -110,6 +111,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         opAltaEmpleado = new javax.swing.JMenuItem();
         opBajaProducto = new javax.swing.JMenuItem();
         opBajaEmpleado = new javax.swing.JMenuItem();
+        opModificarProducto = new javax.swing.JMenuItem();
         menuOpEditar = new javax.swing.JMenu();
         menuOpOpciones = new javax.swing.JMenu();
         //creacion de los componentes de mi registro
@@ -441,9 +443,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         btnActualizar.setText("Actualizar");
         jPanelUpdate.add(btnActualizar);
         btnActualizar.setBounds(220, 380, 180, 35);
+        btnActualizar.addActionListener(this);
         
         this.panelPrincipal.add(this.jPanelUpdate);
         this.jPanelUpdate.setBounds(200,200,660,440);
+        this.jPanelUpdate.setVisible(false);
         
         /*Fin de componentes de modificacion*/
         
@@ -560,11 +564,14 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         opBajaEmpleado.addActionListener(this);
         opBajaProducto.setText("Baja de producto ...");
         opBajaProducto.addActionListener(this);
+        opModificarProducto.setText("Modificar producto ...");
+        opModificarProducto.addActionListener(this);
         
         menuOpOpciones.add(opCambiarPersonal);
         menuOpOpciones.add(opAltaEmpleado);
-        menuOpOpciones.add(opAltaProducto);
         menuOpOpciones.add(opBajaEmpleado);
+        menuOpOpciones.add(opAltaProducto);
+        menuOpOpciones.add(opModificarProducto);
         menuOpOpciones.add(opBajaProducto);
         
         menuPrincipal.add(menuOpOpciones);
@@ -589,6 +596,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     		panelRegistro.setVisible(true);
     		panelEmpleadoRe.setVisible(true);
     		panelProductosRe.setVisible(false);
+    		this.jPanelUpdate.setVisible(false);
     	}
     	//si queremos registrar un producto esto pasa
     	if(evento.getSource()==opAltaProducto) {
@@ -596,10 +604,19 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     		panelRegistro.setVisible(true);
     		panelProductosRe.setVisible(true);
     		panelEmpleadoRe.setVisible(false);
+    		this.jPanelUpdate.setVisible(false);
+    	}
+    	//si queremos modificar un producto esto pasa
+    	if(evento.getSource()==opModificarProducto) {
+    		panelVentas.setVisible(false);
+    		panelRegistro.setVisible(false);
+    		panelProductosRe.setVisible(false);
+    		panelEmpleadoRe.setVisible(false);
+    		this.jPanelUpdate.setVisible(true);
     	}
     	// cuando registramos un empleado o producto debemos de esconder el formulario de registro
     	// y aparecer el formulario de ventas
-    	if(evento.getSource() == this.btnRegistroEmp || evento.getSource() == this.btnRegistroProd ){
+    	if(evento.getSource() == this.btnRegistroEmp || evento.getSource() == this.btnRegistroProd || evento.getSource() == this.btnActualizar){
     		this.panelRegistro.setVisible(false);
     		this.panelVentas.setVisible(true);
     	}
