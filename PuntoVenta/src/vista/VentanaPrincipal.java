@@ -618,6 +618,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     	// y aparecer el formulario de ventas
     	if(evento.getSource() == this.btnRegistroEmp || evento.getSource() == this.btnRegistroProd || evento.getSource() == this.btnActualizar){
     		this.panelRegistro.setVisible(false);
+    		this.jPanelUpdate.setVisible(false);
     		this.panelVentas.setVisible(true);
     	}
     }
