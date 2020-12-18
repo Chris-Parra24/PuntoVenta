@@ -40,7 +40,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JLabel lbDescuentoProd;
     private javax.swing.JLabel lbNombreEmp;
     private javax.swing.JLabel lbPasswordEmp;
-    private javax.swing.JLabel lbPrecioProd;
+    private javax.swing.JLabel lbPrecioProd1;
+    private javax.swing.JLabel lbPrecioProd2;
     private javax.swing.JLabel lbTelefonoEmp;
     private javax.swing.JLabel lbTituloRegistro;
     private javax.swing.JLabel lbUnidadProd;
@@ -57,21 +58,28 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JTextField txtNombreEmp;
     private javax.swing.JPasswordField txtPasswordEmp;
     private javax.swing.JTextField txtPrecioProd;
+    private javax.swing.JTextField txtPrecioProd2;
     private javax.swing.JTextField txtTelefonoEmp;
     private javax.swing.JTextField txtUnidadProd;
     //final panel de registro
     //inicio de nuestros componentes de venta
+    private javax.swing.JButton btnAgregarPeso;
+    private javax.swing.JButton btnBuscarProdVentas;
+    private javax.swing.JButton btnCuentaNueva;
     private javax.swing.JButton btnImprimir;
-    private javax.swing.JButton btnRealizarPedido;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbIndicacionBusqueda;
+    private javax.swing.JLabel lbIngresarPeso;
     private javax.swing.JLabel lbTotal;
-    private javax.swing.JList<String> listaPedido;
-    private javax.swing.JPanel panelProductosVenta;
-    private javax.swing.JPanel panelVentas;
-    private javax.swing.JScrollPane scrollLista;
-    private javax.swing.JScrollPane scrollTabla;
-    private javax.swing.JTable tblProductosVenta;
-    private javax.swing.JTextField txtTotal;
     private javax.swing.JPanel panelPedidoVenta;
+    private javax.swing.JPanel panelProductosBusq;
+    private javax.swing.JPanel panelProductosVisual;
+    private javax.swing.JPanel panelVentas;
+    private javax.swing.JSeparator sepSeparador;
+    private javax.swing.JTable tablaProdPedido;
+    private javax.swing.JTextField txtBuscarProd;
+    private javax.swing.JTextField txtPeso;
+    private javax.swing.JTextField txtTotal;
     //fin de componentes de venta
     //inicio de componentes de modificacion de productos
     private javax.swing.JButton btnActualizar;
@@ -120,8 +128,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         panelProductosRe = new javax.swing.JPanel();
         txtDescripcionProd = new javax.swing.JTextField();
         lbDescripcionProd = new javax.swing.JLabel();
-        lbPrecioProd = new javax.swing.JLabel();
+        lbPrecioProd1 = new javax.swing.JLabel();
+        lbPrecioProd2 = new javax.swing.JLabel();
         txtPrecioProd = new javax.swing.JTextField();
+        txtPrecioProd2 = new javax.swing.JTextField();
         lbUnidadProd = new javax.swing.JLabel();
         txtUnidadProd = new javax.swing.JTextField();
         cmbDepartamentoProd = new javax.swing.JComboBox<>();
@@ -148,16 +158,22 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         lbDatosEmp = new javax.swing.JLabel();
         /*componentes de mi ventas **************************************************/
         panelVentas = new javax.swing.JPanel();
-        panelProductosVenta = new javax.swing.JPanel();
-        scrollTabla = new javax.swing.JScrollPane();
-        tblProductosVenta = new javax.swing.JTable();
-        btnRealizarPedido = new javax.swing.JButton();
+        panelProductosBusq = new javax.swing.JPanel();
+        btnBuscarProdVentas = new javax.swing.JButton();
+        txtBuscarProd = new javax.swing.JTextField();
+        lbIndicacionBusqueda = new javax.swing.JLabel();
+        lbIngresarPeso = new javax.swing.JLabel();
+        txtPeso = new javax.swing.JTextField();
+        btnAgregarPeso = new javax.swing.JButton();
+        sepSeparador = new javax.swing.JSeparator();
         panelPedidoVenta = new javax.swing.JPanel();
         btnImprimir = new javax.swing.JButton();
-        scrollLista = new javax.swing.JScrollPane();
-        listaPedido = new javax.swing.JList<>();
         lbTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
+        btnCuentaNueva = new javax.swing.JButton();
+        panelProductosVisual = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProdPedido = new javax.swing.JTable();
         //****************************fin de componentes de la venta
         
         /*Componentes de mi modificacion de productos*/
@@ -198,160 +214,197 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         lbTituloRegistro.setForeground(java.awt.Color.black);
         lbTituloRegistro.setText("Formulario de registro");
         panelRegistro.add(lbTituloRegistro);
-        lbTituloRegistro.setBounds(80, 10, 250, 30);
+        lbTituloRegistro.setBounds(250, 10, 250, 30);
 
         panelProductosRe.setBackground(java.awt.Color.white);
         panelProductosRe.setLayout(null);
 
+        txtDescripcionProd.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtDescripcionProd.setBackground(java.awt.Color.white);
         txtDescripcionProd.setForeground(java.awt.Color.black);
         panelProductosRe.add(txtDescripcionProd);
-        txtDescripcionProd.setBounds(140, 40, 125, 25);
+        txtDescripcionProd.setBounds(250, 70, 200, 30);
 
+        lbDescripcionProd.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbDescripcionProd.setForeground(java.awt.Color.black);
         lbDescripcionProd.setText("Descripcion");
         panelProductosRe.add(lbDescripcionProd);
-        lbDescripcionProd.setBounds(30, 40, 100, 20);
+        lbDescripcionProd.setBounds(20, 70, 120, 30);
 
-        lbPrecioProd.setForeground(java.awt.Color.black);
-        lbPrecioProd.setText("Precio");
-        panelProductosRe.add(lbPrecioProd);
-        lbPrecioProd.setBounds(30, 80, 80, 16);
+        lbPrecioProd1.setFont(new java.awt.Font("Ubuntu", 1, 18));
+        lbPrecioProd1.setForeground(java.awt.Color.black);
+        lbPrecioProd1.setText("Precio menudeo");
+        panelProductosRe.add(lbPrecioProd1);
+        lbPrecioProd1.setBounds(20, 150, 150, 30);
+        
+        lbPrecioProd2.setFont(new java.awt.Font("Ubuntu",1,18));
+        lbPrecioProd2.setForeground(java.awt.Color.black);
+        lbPrecioProd2.setText("Precio mayoreo");
+        panelProductosRe.add(lbPrecioProd2);
+        lbPrecioProd2.setBounds(20, 200, 150, 30);
+        
 
+        txtPrecioProd.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtPrecioProd.setBackground(java.awt.Color.white);
         txtPrecioProd.setForeground(java.awt.Color.black);
         panelProductosRe.add(txtPrecioProd);
-        txtPrecioProd.setBounds(140, 80, 125, 25);
+        txtPrecioProd.setBounds(250, 150, 200, 30);
+        
+        txtPrecioProd2.setFont(new java.awt.Font("Ubuntu", 0, 18));
+        txtPrecioProd2.setBackground(java.awt.Color.white);
+        txtPrecioProd2.setForeground(java.awt.Color.black);
+        panelProductosRe.add(txtPrecioProd2);
+        txtPrecioProd2.setBounds(250, 200, 200, 30);
 
+        lbUnidadProd.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbUnidadProd.setForeground(java.awt.Color.black);
         lbUnidadProd.setText("Unidad");
         panelProductosRe.add(lbUnidadProd);
-        lbUnidadProd.setBounds(30, 125, 80, 16);
+        lbUnidadProd.setBounds(20, 270, 100, 30);
 
+        txtUnidadProd.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtUnidadProd.setBackground(java.awt.Color.white);
         txtUnidadProd.setForeground(java.awt.Color.black);
         panelProductosRe.add(txtUnidadProd);
-        txtUnidadProd.setBounds(140, 120, 125, 25);
+        txtUnidadProd.setBounds(250, 270, 200, 30);
 
         cmbDepartamentoProd.setBackground(java.awt.Color.black);
         cmbDepartamentoProd.setEditable(true);
-        cmbDepartamentoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 2", "Item 3", "Item 4" }));
+        cmbDepartamentoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Frutas", "Verduras", "Carnes", "Abarratores","Quesos" }));
         panelProductosRe.add(cmbDepartamentoProd);
-        cmbDepartamentoProd.setBounds(140, 170, 130, 28);
+        cmbDepartamentoProd.setBounds(250, 370, 200, 30);
 
+        lbDepartamentoProd.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbDepartamentoProd.setForeground(java.awt.Color.black);
         lbDepartamentoProd.setText("Departamento");
         panelProductosRe.add(lbDepartamentoProd);
-        lbDepartamentoProd.setBounds(30, 175, 110, 16);
+        lbDepartamentoProd.setBounds(20, 370, 130, 30);
 
+        lbDescuentoProd.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbDescuentoProd.setForeground(java.awt.Color.black);
         lbDescuentoProd.setText("Descuento");
         panelProductosRe.add(lbDescuentoProd);
-        lbDescuentoProd.setBounds(30, 220, 80, 16);
+        lbDescuentoProd.setBounds(20, 470, 120, 30);
 
+        txtDescuentoProd.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtDescuentoProd.setBackground(java.awt.Color.white);
         txtDescuentoProd.setForeground(java.awt.Color.black);
         panelProductosRe.add(txtDescuentoProd);
-        txtDescuentoProd.setBounds(140, 220, 125, 25);
+        txtDescuentoProd.setBounds(250, 470, 200, 30);
 
+        rbActivoProd.setFont(new java.awt.Font("Ubuntu", 0, 18));
         rbActivoProd.setForeground(java.awt.Color.black);
         rbActivoProd.setText("Activo");
         panelProductosRe.add(rbActivoProd);
-        rbActivoProd.setBounds(30, 250, 70, 23);
+        rbActivoProd.setBounds(20, 525, 110, 30);
 
+        rbInactivoProd.setFont(new java.awt.Font("Ubuntu", 0, 18));
         rbInactivoProd.setForeground(java.awt.Color.black);
         rbInactivoProd.setText("Inactivo");
         panelProductosRe.add(rbInactivoProd);
-        rbInactivoProd.setBounds(170, 250, 83, 23);
+        rbInactivoProd.setBounds(200, 525, 110, 30);
 
+        btnRegistroProd.setFont(new java.awt.Font("Ubuntu", 0, 18));
         btnRegistroProd.setText("Registrar");
         btnRegistroProd.addActionListener(this);
         panelProductosRe.add(btnRegistroProd);
-        btnRegistroProd.setBounds(100, 280, 120, 20);
+        btnRegistroProd.setBounds(20, 565, 120, 30);
 
-        lbDatosProd.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        lbDatosProd.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lbDatosProd.setForeground(java.awt.Color.black);
         lbDatosProd.setText("Datos Producto");
         panelProductosRe.add(lbDatosProd);
-        lbDatosProd.setBounds(100, 10, 100, 20);
+        lbDatosProd.setBounds(250, 10, 250, 30);
 
         panelRegistro.add(panelProductosRe);
-        panelProductosRe.setBounds(50, 50, 300, 310);
+        panelProductosRe.setBounds(50, 50, 600, 600);
 
         panelEmpleadoRe.setBackground(java.awt.Color.white);
         panelEmpleadoRe.setLayout(null);
 
+        lbNombreEmp.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbNombreEmp.setForeground(java.awt.Color.black);
         lbNombreEmp.setText("Nombre");
         panelEmpleadoRe.add(lbNombreEmp);
-        lbNombreEmp.setBounds(20, 50, 80, 16);
-
+        lbNombreEmp.setBounds(20, 70, 110, 30);
+        
+        lbAppParteno.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbAppParteno.setForeground(java.awt.Color.black);
         lbAppParteno.setText("Apellido Paterno");
         panelEmpleadoRe.add(lbAppParteno);
-        lbAppParteno.setBounds(20, 85, 120, 16);
+        lbAppParteno.setBounds(20, 170, 160, 30);
 
+        lbAppMaterno.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbAppMaterno.setForeground(java.awt.Color.black);
         lbAppMaterno.setText("Apellido Materno");
         panelEmpleadoRe.add(lbAppMaterno);
-        lbAppMaterno.setBounds(20, 125, 123, 16);
+        lbAppMaterno.setBounds(20, 270, 163, 30);
 
+        lbTelefonoEmp.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbTelefonoEmp.setForeground(java.awt.Color.black);
         lbTelefonoEmp.setText("Telefono");
         panelEmpleadoRe.add(lbTelefonoEmp);
-        lbTelefonoEmp.setBounds(20, 170, 90, 16);
+        lbTelefonoEmp.setBounds(20, 370, 110, 30);
 
+        lbPasswordEmp.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbPasswordEmp.setForeground(java.awt.Color.black);
         lbPasswordEmp.setText("Contraseña");
         panelEmpleadoRe.add(lbPasswordEmp);
-        lbPasswordEmp.setBounds(20, 210, 110, 16);
+        lbPasswordEmp.setBounds(20, 470, 110, 30);
 
+        txtNombreEmp.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtNombreEmp.setBackground(java.awt.Color.white);
         txtNombreEmp.setForeground(java.awt.Color.black);
         panelEmpleadoRe.add(txtNombreEmp);
-        txtNombreEmp.setBounds(148, 40, 130, 25);
+        txtNombreEmp.setBounds(250, 70, 200, 30);
 
+        txtAppPaterno.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtAppPaterno.setBackground(java.awt.Color.white);
         txtAppPaterno.setForeground(java.awt.Color.black);
         panelEmpleadoRe.add(txtAppPaterno);
-        txtAppPaterno.setBounds(148, 80, 130, 25);
+        txtAppPaterno.setBounds(250, 170, 200, 30);
 
+        txtAppMaterno.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtAppMaterno.setBackground(java.awt.Color.white);
         txtAppMaterno.setForeground(java.awt.Color.black);
         panelEmpleadoRe.add(txtAppMaterno);
-        txtAppMaterno.setBounds(148, 120, 130, 25);
+        txtAppMaterno.setBounds(250, 270, 200, 30);
 
+        txtTelefonoEmp.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtTelefonoEmp.setBackground(java.awt.Color.white);
         txtTelefonoEmp.setForeground(java.awt.Color.black);
         panelEmpleadoRe.add(txtTelefonoEmp);
-        txtTelefonoEmp.setBounds(148, 160, 130, 25);
+        txtTelefonoEmp.setBounds(250, 370, 200, 30);
 
+        txtPasswordEmp.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtPasswordEmp.setBackground(java.awt.Color.white);
         txtPasswordEmp.setForeground(java.awt.Color.black);
         panelEmpleadoRe.add(txtPasswordEmp);
-        txtPasswordEmp.setBounds(148, 200, 130, 25);
+        txtPasswordEmp.setBounds(250, 470, 200, 30);
 
+        rbVerPassword.setFont(new java.awt.Font("Ubuntu", 0, 16));
         rbVerPassword.setForeground(java.awt.Color.black);
         rbVerPassword.setText("Ver contraseña");
         panelEmpleadoRe.add(rbVerPassword);
-        rbVerPassword.setBounds(155, 260, 135, 23);
+        rbVerPassword.setBounds(207, 550, 160, 30);
 
+        btnRegistroEmp.setFont(new java.awt.Font("Ubuntu", 0, 16));
         btnRegistroEmp.setText("Registrar");
         btnRegistroEmp.addActionListener(this);
         panelEmpleadoRe.add(btnRegistroEmp);
-        btnRegistroEmp.setBounds(20, 263, 110, 20);
+        btnRegistroEmp.setBounds(20, 550, 135, 30);
 
-        lbDatosEmp.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        lbDatosEmp.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lbDatosEmp.setForeground(java.awt.Color.black);
         lbDatosEmp.setText("Datos del empleado");
         panelEmpleadoRe.add(lbDatosEmp);
-        lbDatosEmp.setBounds(80, 10, 140, 20);
+        lbDatosEmp.setBounds(200, 10, 250, 30);
 
         panelRegistro.add(panelEmpleadoRe);
-        panelEmpleadoRe.setBounds(50, 50, 300, 310);
+        panelEmpleadoRe.setBounds(50, 50, 600, 600);
 
         panelPrincipal.add(panelRegistro);
-        panelRegistro.setBounds(200, 200, 400, 400);
+        panelRegistro.setBounds(400, 50, 700, 700);
         //con esto lo hacemos visible
         panelRegistro.setVisible(false);
         panelEmpleadoRe.setVisible(false);
@@ -453,88 +506,124 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         
         //ventas***************************************
         panelVentas.setBackground(java.awt.Color.lightGray);
+        panelVentas.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         panelVentas.setLayout(null);
 
-        panelProductosVenta.setBackground(java.awt.Color.lightGray);
-        panelProductosVenta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 14),java.awt.Color.black)); // NOI18N
-        panelProductosVenta.setLayout(null);
+        panelProductosBusq.setBackground(java.awt.Color.lightGray);
+        panelProductosBusq.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18), java.awt.Color.black)); // NOI18N
+        panelProductosBusq.setLayout(null);
 
-        tblProductosVenta.setBackground(java.awt.Color.white);
-        tblProductosVenta.setForeground(java.awt.Color.black);
-        tblProductosVenta.setModel(new javax.swing.table.DefaultTableModel(
+        btnBuscarProdVentas.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btnBuscarProdVentas.setText("Buscar");
+        panelProductosBusq.add(btnBuscarProdVentas);
+        btnBuscarProdVentas.setBounds(154, 90, 120, 30);
+
+        txtBuscarProd.setBackground(java.awt.Color.white);
+        txtBuscarProd.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtBuscarProd.setForeground(java.awt.Color.black);
+        panelProductosBusq.add(txtBuscarProd);
+        txtBuscarProd.setBounds(10, 90, 140, 30);
+
+        lbIndicacionBusqueda.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        lbIndicacionBusqueda.setForeground(java.awt.Color.black);
+        lbIndicacionBusqueda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbIndicacionBusqueda.setText("<html>Ingrese el identificador (ID)<br>del producto a buscar</html>");
+        panelProductosBusq.add(lbIndicacionBusqueda);
+        lbIndicacionBusqueda.setBounds(30, 20, 230, 60);
+
+        lbIngresarPeso.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        lbIngresarPeso.setForeground(java.awt.Color.black);
+        lbIngresarPeso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbIngresarPeso.setText("<html>Ingrese el peso del producto</html>");
+        panelProductosBusq.add(lbIngresarPeso);
+        lbIngresarPeso.setBounds(30, 130, 230, 60);
+
+        txtPeso.setBackground(java.awt.Color.white);
+        txtPeso.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtPeso.setForeground(java.awt.Color.black);
+        panelProductosBusq.add(txtPeso);
+        txtPeso.setBounds(70, 180, 140, 30);
+
+        btnAgregarPeso.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btnAgregarPeso.setText("Agregar");
+        panelProductosBusq.add(btnAgregarPeso);
+        btnAgregarPeso.setBounds(70, 220, 140, 30);
+        panelProductosBusq.add(sepSeparador);
+        sepSeparador.setBounds(10, 130, 260, 10);
+
+        panelVentas.add(panelProductosBusq);
+        panelProductosBusq.setBounds(10, 10, 280, 260);
+
+        panelPedidoVenta.setBackground(java.awt.Color.lightGray);
+        panelPedidoVenta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18), java.awt.Color.black)); // NOI18N
+        panelPedidoVenta.setLayout(null);
+
+        btnImprimir.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btnImprimir.setText("Imprimir");
+        panelPedidoVenta.add(btnImprimir);
+        btnImprimir.setBounds(70, 80, 130, 30);
+
+        lbTotal.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        lbTotal.setForeground(java.awt.Color.black);
+        lbTotal.setText("Total");
+        panelPedidoVenta.add(lbTotal);
+        lbTotal.setBounds(30, 20, 50, 30);
+
+        txtTotal.setBackground(java.awt.Color.white);
+        txtTotal.setForeground(java.awt.Color.black);
+        panelPedidoVenta.add(txtTotal);
+        txtTotal.setBounds(100, 20, 160, 30);
+
+        panelVentas.add(panelPedidoVenta);
+        panelPedidoVenta.setBounds(10, 415, 280, 130);
+
+        btnCuentaNueva.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btnCuentaNueva.setText("Cuenta nueva");
+        btnCuentaNueva.setToolTipText("");
+        panelVentas.add(btnCuentaNueva);
+        btnCuentaNueva.setBounds(800, 510, 150, 30);
+
+        panelProductosVisual.setBackground(java.awt.Color.lightGray);
+        panelProductosVisual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panelProductosVisual.setLayout(null);
+
+        tablaProdPedido.setBackground(java.awt.Color.white);
+        tablaProdPedido.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        tablaProdPedido.setForeground(java.awt.Color.black);
+        tablaProdPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), "Papa",  new Double(15.3), null, null},
-                { new Integer(2), "Zanahoria",  new Double(16.2), null, null},
-                { new Integer(3), "Chayote",  new Double(19.75), null, null},
-                { new Integer(4), "Camote",  new Double(15.31), null, null},
-                { new Integer(5), "Sabritas",  new Double(14.258), null, null},
-                { new Integer(6), "Queso",  new Double(11.32), null, null},
-                { new Integer(7), "Carne res",  new Double(50.25), null, null},
-                { new Integer(8), "Pimienta",  new Double(20.22), null, null},
-                { new Integer(9), "Ajo",  new Double(15.0), null, null},
-                { new Integer(10), "Chile seco",  new Double(18.23), null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Descripcion", "Precio", "Seleccion", "Cantidad"
+                "Descripcion", "Precio", "Peso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Float.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        tblProductosVenta.setColumnSelectionAllowed(true);
-        tblProductosVenta.setShowGrid(true);
-        scrollTabla.setViewportView(tblProductosVenta);
-        tblProductosVenta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tablaProdPedido);
+        if (tablaProdPedido.getColumnModel().getColumnCount() > 0) {
+            tablaProdPedido.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tablaProdPedido.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tablaProdPedido.getColumnModel().getColumn(2).setPreferredWidth(10);
+        }
 
-        panelProductosVenta.add(scrollTabla);
-        scrollTabla.setBounds(10, 20, 870, 190);
+        panelProductosVisual.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 610, 440);
 
-        btnRealizarPedido.setText("Realizar pedido");
-        panelProductosVenta.add(btnRealizarPedido);
-        btnRealizarPedido.setBounds(760, 220, 120, 25);
-
-        panelVentas.add(panelProductosVenta);
-        panelProductosVenta.setBounds(10, 10, 890, 260);
-
-        panelPedidoVenta.setBackground(java.awt.Color.lightGray);
-        panelPedidoVenta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), java.awt.Color.black)); // NOI18N
-        panelPedidoVenta.setLayout(null);
-
-        btnImprimir.setText("Imprimir");
-        panelPedidoVenta.add(btnImprimir);
-        btnImprimir.setBounds(250, 110, 130, 25);
-
-        listaPedido.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Papa", "Zanahoria", "Chayote", "Camote", "Sabritas", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        scrollLista.setViewportView(listaPedido);
-
-        panelPedidoVenta.add(scrollLista);
-        scrollLista.setBounds(20, 20, 200, 140);
-
-        lbTotal.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        lbTotal.setForeground(java.awt.Color.black);
-        lbTotal.setText("Total");
-        panelPedidoVenta.add(lbTotal);
-        lbTotal.setBounds(240, 57, 40, 30);
-
-        txtTotal.setBackground(java.awt.Color.white);
-        txtTotal.setForeground(java.awt.Color.black);
-        panelPedidoVenta.add(txtTotal);
-        txtTotal.setBounds(290, 60, 100, 25);
-
-        panelVentas.add(panelPedidoVenta);
-        panelPedidoVenta.setBounds(230, 300, 420, 170);
+        panelVentas.add(panelProductosVisual);
+        panelProductosVisual.setBounds(330, 20, 630, 460);
 
         panelPrincipal.add(panelVentas);
-        panelVentas.setBounds(350, 50, 910, 490);
+        panelVentas.setBounds(0, 0, 970, 600);
         //fin de ventas ************************************
         
         //***********************************************************
