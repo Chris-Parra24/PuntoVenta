@@ -7,10 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import modelo.VO.ProductoVO;
+import java.util.ArrayList;
 import controlador.Coordinador;
 
 public class VentanaPrincipal extends javax.swing.JFrame implements ActionListener{
+	private ArrayList<ProductoVO> misProductosVO;
     //atributos
 	private javax.swing.JMenu menuOpArchivo;
     private javax.swing.JMenu menuOpEditar;
@@ -32,6 +34,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JButton btnRegistroProd;
     private javax.swing.JComboBox<String> cmbDepartamentoProd;
     private javax.swing.JLabel lbAppMaterno;
+    private javax.swing.JLabel lbRol;
+    private javax.swing.JTextField txtRol;
     private javax.swing.JLabel lbAppParteno;
     private javax.swing.JLabel lbDatosEmp;
     private javax.swing.JLabel lbDatosProd;
@@ -156,6 +160,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         rbVerPassword = new javax.swing.JRadioButton();
         btnRegistroEmp = new javax.swing.JButton();
         lbDatosEmp = new javax.swing.JLabel();
+        lbRol = new javax.swing.JLabel();
+        txtRol = new javax.swing.JTextField();
         /*componentes de mi ventas **************************************************/
         panelVentas = new javax.swing.JPanel();
         panelProductosBusq = new javax.swing.JPanel();
@@ -270,9 +276,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
 
         cmbDepartamentoProd.setBackground(java.awt.Color.black);
         cmbDepartamentoProd.setEditable(true);
-        cmbDepartamentoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Frutas", "Verduras", "Carnes", "Abarratores","Quesos" }));
+        cmbDepartamentoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Frutas", "Verduras", "Carnes", "Abarratores","Cremeria" }));
         panelProductosRe.add(cmbDepartamentoProd);
         cmbDepartamentoProd.setBounds(250, 370, 200, 30);
+        cmbDepartamentoProd.setEditable(false);
 
         lbDepartamentoProd.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbDepartamentoProd.setForeground(java.awt.Color.black);
@@ -324,33 +331,39 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
 
         lbNombreEmp.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbNombreEmp.setForeground(java.awt.Color.black);
-        lbNombreEmp.setText("Nombre");
+        lbNombreEmp.setText("Nombre *");
         panelEmpleadoRe.add(lbNombreEmp);
         lbNombreEmp.setBounds(20, 70, 110, 30);
         
         lbAppParteno.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbAppParteno.setForeground(java.awt.Color.black);
-        lbAppParteno.setText("Apellido Paterno");
+        lbAppParteno.setText("Apellido Paterno *");
         panelEmpleadoRe.add(lbAppParteno);
         lbAppParteno.setBounds(20, 170, 160, 30);
 
         lbAppMaterno.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbAppMaterno.setForeground(java.awt.Color.black);
-        lbAppMaterno.setText("Apellido Materno");
+        lbAppMaterno.setText("Apellido Materno *");
         panelEmpleadoRe.add(lbAppMaterno);
         lbAppMaterno.setBounds(20, 270, 163, 30);
 
         lbTelefonoEmp.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbTelefonoEmp.setForeground(java.awt.Color.black);
-        lbTelefonoEmp.setText("Telefono");
+        lbTelefonoEmp.setText("Telefono *");
         panelEmpleadoRe.add(lbTelefonoEmp);
         lbTelefonoEmp.setBounds(20, 370, 110, 30);
+        
+        lbRol.setFont(new java.awt.Font("Ubuntu",1,18));
+        lbRol.setForeground(java.awt.Color.black);
+        lbRol.setText("Rol *");
+        panelEmpleadoRe.add(lbRol);
+        lbRol.setBounds(20,420,100,30);
 
         lbPasswordEmp.setFont(new java.awt.Font("Ubuntu", 1, 18));
         lbPasswordEmp.setForeground(java.awt.Color.black);
-        lbPasswordEmp.setText("Contraseña");
+        lbPasswordEmp.setText("Contraseña *");
         panelEmpleadoRe.add(lbPasswordEmp);
-        lbPasswordEmp.setBounds(20, 470, 110, 30);
+        lbPasswordEmp.setBounds(20, 470, 125, 30);
 
         txtNombreEmp.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtNombreEmp.setBackground(java.awt.Color.white);
@@ -375,18 +388,26 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         txtTelefonoEmp.setForeground(java.awt.Color.black);
         panelEmpleadoRe.add(txtTelefonoEmp);
         txtTelefonoEmp.setBounds(250, 370, 200, 30);
+        
+        txtRol.setFont(new java.awt.Font("Ubuntu", 0, 18));
+        txtRol.setBackground(java.awt.Color.white);
+        txtRol.setForeground(java.awt.Color.black);
+        panelEmpleadoRe.add(txtRol);
+        txtRol.setBounds(250,420,200,30);
 
         txtPasswordEmp.setFont(new java.awt.Font("Ubuntu", 0, 18));
         txtPasswordEmp.setBackground(java.awt.Color.white);
         txtPasswordEmp.setForeground(java.awt.Color.black);
         panelEmpleadoRe.add(txtPasswordEmp);
         txtPasswordEmp.setBounds(250, 470, 200, 30);
+        txtPasswordEmp.setEchoChar('*');
 
         rbVerPassword.setFont(new java.awt.Font("Ubuntu", 0, 16));
         rbVerPassword.setForeground(java.awt.Color.black);
         rbVerPassword.setText("Ver contraseña");
         panelEmpleadoRe.add(rbVerPassword);
         rbVerPassword.setBounds(207, 550, 160, 30);
+        rbVerPassword.addActionListener(this);
 
         btnRegistroEmp.setFont(new java.awt.Font("Ubuntu", 0, 16));
         btnRegistroEmp.setText("Registrar");
@@ -438,6 +459,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         btnBuscarProd.setText("Buscar");
         jPanelUpdate.add(btnBuscarProd);
         btnBuscarProd.setBounds(320, 130, 220, 30);
+        btnBuscarProd.addActionListener(this);
 
         lbDescripcion.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         lbDescripcion.setForeground(java.awt.Color.black);
@@ -457,6 +479,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         txtDescripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanelUpdate.add(txtDescripcion);
         txtDescripcion.setBounds(290, 230, 200, 31);
+        txtDescripcion.setEditable(false);
 
         txtPrecio.setBackground(java.awt.Color.white);
         txtPrecio.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
@@ -491,6 +514,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         txtIdentificador2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanelUpdate.add(txtIdentificador2);
         txtIdentificador2.setBounds(290, 190, 200, 31);
+        txtIdentificador2.setEditable(false);
 
         btnActualizar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         btnActualizar.setText("Actualizar");
@@ -705,16 +729,172 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     	}
     	// cuando registramos un empleado o producto debemos de esconder el formulario de registro
     	// y aparecer el formulario de ventas
-    	if(evento.getSource() == this.btnRegistroEmp || evento.getSource() == this.btnRegistroProd || evento.getSource() == this.btnActualizar){
+    	/*if(evento.getSource() == this.btnRegistroProd || evento.getSource() == this.btnActualizar){
+    		limpiarCampos(1);
     		this.panelRegistro.setVisible(false);
     		this.jPanelUpdate.setVisible(false);
     		this.panelVentas.setVisible(true);
+    	}*/
+    	
+    	if(evento.getSource() == this.btnBuscarProd) {
+    		int id;
+    		ProductoVO miProducto;
+    		if(coordinador.validarCampos(this.txtIdentificador1.getText())) {
+    			JOptionPane.showMessageDialog(null, "¡Ingrese un ID!");
+    		}else {
+    			//tenemos que buscar que este en el arrayList
+    			id = Integer.parseInt(this.txtIdentificador1.getText());
+    			miProducto = busquedaProd(id);
+    			if(miProducto==null) {
+    				JOptionPane.showMessageDialog(null, "¡No se encuentra disponible el producto o no existe!");
+    			}else {
+    				limpiarCampos(3);
+    				this.txtIdentificador2.setText(""+miProducto.getId_producto());
+    				this.txtPrecio.setText("" + miProducto.getPrecio_menudeo());
+    				this.txtDescripcion.setText(miProducto.getDescripcion());
+    				if(miProducto.isStatus()) {
+    					this.rbActivo.setSelected(true);
+    				}else {
+    					this.rbInactivo.setSelected(true);
+    				}
+    			}
+    		}
+    	}
+    	
+    	if(evento.getSource() == this.btnActualizar) {
+    		if(coordinador.validarCampos(this.txtIdentificador2.getText(),this.txtPrecio.getText(),this.txtDescripcion.getText())) {
+    			JOptionPane.showMessageDialog(null,"¡Campos vacios!");
+    		}else {
+    			int id = Integer.parseInt(this.txtIdentificador2.getText());
+    			float precio = Float.parseFloat(this.txtPrecio.getText());
+    			if(modificarProducto(id, precio)) {
+    				//modificamos en la BD
+    				if(coordinador.updateProducto(id,precio)) {
+    					JOptionPane.showMessageDialog(null, "¡Se modifico de manera satisfactoria el precio del producto!");
+        				limpiarCampos(4);
+    					this.panelRegistro.setVisible(false);
+        	    		this.jPanelUpdate.setVisible(false);
+        	    		this.panelVentas.setVisible(true);	
+    				}else {
+    					JOptionPane.showMessageDialog(null, "Ocurrio un error en la BD");
+    				}
+    				
+    			}else {
+    				JOptionPane.showMessageDialog(null, "¡No se modifico el producto ya que es el mismo precio!");
+    			}
+    		}
+    	}
+    	
+    	if(evento.getSource() == this.btnRegistroProd) {
+    		boolean respuesta;
+    		//validamos los campos de registro de producto
+    		if(coordinador.validarCampos(this.txtDescripcionProd.getText(), this.txtPrecioProd.getText(), this.txtPrecioProd2.getText(), this.txtUnidadProd.getText(), this.txtDescuentoProd.getText())) {
+    			JOptionPane.showMessageDialog(null, "Ingrese todos los campos marcados con *");
+    		}else {
+    			//validamos que haya seleccionado algo del combo box
+    			if(this.cmbDepartamentoProd.getSelectedIndex() == 0) {
+    				JOptionPane.showMessageDialog(null, "Seleccione algun departamento para el producto");
+    			}else {
+    				//validamos que haya algun radio button seleccionado
+    				if(this.rbActivoProd.isSelected()) {
+    					//ingresamos a la BD el producto esta activo
+    					respuesta = coordinador.insertarProducto(this.txtDescripcionProd.getText(), this.txtPrecioProd.getText(),this.txtPrecioProd2.getText(), this.txtUnidadProd.getText(), this.cmbDepartamentoProd.getSelectedIndex(), this.txtDescuentoProd.getText(), true);
+    					if(respuesta) {
+    						JOptionPane.showMessageDialog(null, "¡Se agrego correctamente el producto!");
+    						limpiarCampos(2);
+							this.panelRegistro.setVisible(false);
+		    	    		this.jPanelUpdate.setVisible(false);
+		    	    		this.panelVentas.setVisible(true);
+    					}else {
+    						JOptionPane.showMessageDialog(null, "¡Ocurrio un error al insertar!");
+    					}
+    				}else {
+    					if(this.rbInactivoProd.isSelected()) {
+    						//ingresamos a la BD el producto esta inactivo es decir todavia no tienen en tienda
+    						respuesta = coordinador.insertarProducto(this.txtDescripcionProd.getText(), this.txtPrecioProd.getText(),this.txtPrecioProd2.getText(), this.txtUnidadProd.getText(), this.cmbDepartamentoProd.getSelectedIndex(), this.txtDescuentoProd.getText(), false);
+    						if(respuesta) {
+    							JOptionPane.showMessageDialog(null, "¡Se agrego correctamente el producto!");
+    							limpiarCampos(2);
+    							this.panelRegistro.setVisible(false);
+    		    	    		this.jPanelUpdate.setVisible(false);
+    		    	    		this.panelVentas.setVisible(true);
+    							
+    						}else {
+    							JOptionPane.showMessageDialog(null, "¡Ocurrio un error al insertar!");
+    						}
+    					}else {
+    						JOptionPane.showMessageDialog(null, "Verifique que el producto se encuentre (Activo)\n o que no haya por el momento (Inactivo)");
+    					}
+    				}
+    			}
+    		}
+    	}
+    	
+    	//Funcionalidad de insertar un empleado a la BD cuando se le da al boton de registrar empleado
+    	if(evento.getSource() == this.btnRegistroEmp ) {
+    		int respuesta;
+    		//primero debemos de verificar que no este alguno de los campos vacios antes de ingresarlos a la BD
+    		if(coordinador.validarCampos(this.txtNombreEmp.getText(),this.txtAppPaterno.getText(),this.txtAppMaterno.getText(),this.txtTelefonoEmp.getText(),this.txtPasswordEmp.getText(), this.txtRol.getText())) {
+    			JOptionPane.showMessageDialog(null, "Ingrese todos los campos marcados con *");
+    		}else {
+    			//aquí podemos ya meter los valores a la BD
+    			respuesta = coordinador.insertarPersonal(this.txtNombreEmp.getText(),this.txtAppPaterno.getText(),this.txtAppMaterno.getText(),this.txtTelefonoEmp.getText(),this.txtPasswordEmp.getText(), this.txtRol.getText());
+    			if(respuesta != -1) {
+    				limpiarCampos(1);
+    				JOptionPane.showMessageDialog(null, "Se ingreso correctamente al Empleado");
+    				this.panelRegistro.setVisible(false);
+    	    		this.jPanelUpdate.setVisible(false);
+    	    		this.panelVentas.setVisible(true);
+    			}
+    		}
+    	}
+    	
+    	
+    	//esto nos sirve para poder ver la contraseña cuando se da de alta un empleado
+    	if(evento.getSource()==rbVerPassword) {
+    		if(rbVerPassword.isSelected()) {
+    			//checamos si esta vacio el campo de la contraseña
+    			if(coordinador.isVacio(txtPasswordEmp.getText())) {
+    				txtPasswordEmp.setEchoChar((char) 0);
+    			}else {
+    				txtPasswordEmp.setEchoChar((char)0);
+    			}
+    		}else {
+    			txtPasswordEmp.setEchoChar('*');
+    		}
     	}
     }
     
     //setter and getter
     public void setCoordinador(Coordinador coordinador) {
     	this.coordinador=coordinador;
+    }
+    public void setProductosVO(ArrayList<ProductoVO> misProductosVO) {
+    	this.misProductosVO = misProductosVO;
+    }
+    
+    public ProductoVO busquedaProd(int id) {
+    	for(int i = 0;i<this.misProductosVO.size(); i++) {
+    		if(this.misProductosVO.get(i).getId_producto() == id) {
+    			return this.misProductosVO.get(i);
+    		}
+    	}
+    	return null;
+    }
+    
+    public boolean modificarProducto(int id,float precio) {
+    	boolean respuesta=false;
+    	for(int i = 0;i<this.misProductosVO.size(); i++) {
+    		if(this.misProductosVO.get(i).getId_producto() == id) { //encontramos el producto
+    			if(this.misProductosVO.get(i).getPrecio_menudeo() == precio) { //checamos si cambio el precio
+    				respuesta = false;
+    			}else {
+    				this.misProductosVO.get(i).setPrecio_menudeo(precio);
+    				respuesta = true;
+    			}
+    		}
+    	}
+    	return respuesta;
     }
     
     public void asignarPrivilegios(int rol) {
@@ -732,6 +912,47 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     		opAltaProducto.setEnabled(false);
     		opBajaEmpleado.setEnabled(false);
     		opBajaProducto.setEnabled(false);
+    	}
+    }
+    
+    public void limpiarCampos(int op) {
+    	switch (op) {
+    		//limpiamos los campos de los empleados de ser 1
+    		case 1:{
+    			this.txtNombreEmp.setText("");
+    			this.txtAppPaterno.setText("");
+    			this.txtAppMaterno.setText("");
+    			this.txtPasswordEmp.setText("");
+    			this.txtTelefonoEmp.setText("");
+    			break;
+    		}
+    		//limpiamos los campos de alta de productos
+    		case 2:{
+    			this.txtDescripcionProd.setText("");
+    			this.txtPrecioProd.setText("");
+    			this.txtPrecioProd2.setText("");
+    			this.cmbDepartamentoProd.setSelectedIndex(0);
+    			this.txtDescuentoProd.setText("");
+    			break;
+    		}
+    		//limpiamos los campos de modificacion de producto
+    		case 3:{
+    			this.txtIdentificador2.setText("");
+    			this.txtDescripcion.setText("");
+    			this.txtPrecio.setText("");
+    			this.rbActivo.setSelected(false);
+    			this.rbInactivo.setSelected(false);
+    			break;
+    		}
+    		case 4:{
+    			this.txtIdentificador1.setText("");
+    			this.txtIdentificador2.setText("");
+    			this.txtDescripcion.setText("");
+    			this.txtPrecio.setText("");
+    			this.rbActivo.setSelected(false);
+    			this.rbInactivo.setSelected(false);
+    			break;
+    		}
     	}
     }
 

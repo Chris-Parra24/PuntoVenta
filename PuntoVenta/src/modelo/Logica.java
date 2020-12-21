@@ -19,6 +19,74 @@ public class Logica {
 		return respuesta;
 	}
 	
+	//funcion que nos checa si hay algo vacio
+	public boolean isVacio(String cadena) {
+		boolean respuesta;
+		if(cadena.isEmpty()) {
+			respuesta=true;
+		}else {
+			respuesta = false;
+		}
+		return respuesta;
+	}
+	
+	//funcion que valida el rol
+	public int validaRol(String rol) {
+		String miRol = rol.toLowerCase();
+		if(miRol.equals("administrador")) {
+			return 1;
+		}else {
+			if(miRol.equals("cajero")) {
+				return 2;
+			}else {
+				if(miRol.equals("empleado")) {
+					return 3;
+				}
+				else {
+					return -1;
+				}
+			}
+		}
+	}
+		
+	//funcion que nos valida campos de formulario
+	public boolean validarCampos(String nombre, String pass, String paterno, String materno, String telefono ,String rol) {
+		boolean respuesta = false;
+		if(nombre.isEmpty() || paterno.isEmpty() || materno.isEmpty() || telefono.isEmpty() || pass.isEmpty() || rol.isEmpty()) {
+			respuesta = true;
+		}
+		return respuesta;
+	}
+	
+	public boolean validarCampos(String descripcion,String precioMenudeo,String precioMayoreo,String unidad,String descuento) {
+		boolean respuesta = false;
+		if(descripcion.isEmpty() || precioMenudeo.isEmpty() || precioMayoreo.isEmpty() || unidad.isEmpty() || descuento.isEmpty()) {
+			respuesta = true;
+		}
+		return respuesta;
+	}
+	
+	public boolean validarCampos(String campo) {
+		boolean respuesta = false;
+		if(campo.isEmpty()) {
+			respuesta = true;
+		}
+		return respuesta;
+	}
+	
+	public boolean validarCampos(String id,String descripcion,String precio) {
+		boolean respuesta = false;
+		if(id.isEmpty()||descripcion.isEmpty()||precio.isEmpty()) {
+			respuesta = true;
+		}
+		return respuesta;
+	}
+	
+	public float convertirFloat(String numero) {
+		return Float.parseFloat(numero);
+	}
+	
+	
 	//setter and getter
 	public void setCoordinador(Coordinador coordinador) {
     	this.coordinador = coordinador;

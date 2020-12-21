@@ -21,13 +21,22 @@ public class PersonalVO {
 		this.estado=false;
 		this.id_rol=0;
 	}
-	public PersonalVO(int idPersonal,String nombre,String contraseña,String apPaterno,String apMaterno,String telefono,int idRol) {
-		this.id_personal = idPersonal;
+	public PersonalVO(int id_personal,String nombre,String contraseña,String apPaterno,String apMaterno,String telefono,int idRol) {
+		this.id_personal = id_personal;
 		this.nombre = nombre;
 		this.ap_paterno = apPaterno;
 		this.ap_materno = apMaterno;
 		this.telefono = telefono;
 		this.estado=true;
+		this.id_rol = idRol;
+	}
+	public PersonalVO(String nombre,String contraseña,String apPaterno,String apMaterno,String telefono,int idRol) {
+		this.nombre = nombre;
+		this.contraseña = contraseña;
+		this.ap_paterno = apPaterno;
+		this.ap_materno = apMaterno;
+		this.telefono = telefono;
+		this.estado = true;
 		this.id_rol = idRol;
 	}
 	//metodos
@@ -66,6 +75,9 @@ public class PersonalVO {
 	}
 	public void setId_rol(int id_rol) {
 		this.id_rol = id_rol;
+	}
+	public String getContraseña() {
+		return this.contraseña;
 	}
 	
 }
