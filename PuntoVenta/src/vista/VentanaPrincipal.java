@@ -4,6 +4,8 @@
 */
 package vista;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,6 +86,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JTextField txtBuscarProd;
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JComboBox<String> cmbMetodoPago;
     //fin de componentes de venta
     //inicio de componentes de modificacion de productos
     private javax.swing.JButton btnActualizar;
@@ -180,6 +183,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         panelProductosVisual = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProdPedido = new javax.swing.JTable();
+        cmbMetodoPago = new javax.swing.JComboBox<>();
         //****************************fin de componentes de la venta
         
         /*Componentes de mi modificacion de productos*/
@@ -585,21 +589,26 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         btnImprimir.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         btnImprimir.setText("Imprimir");
         panelPedidoVenta.add(btnImprimir);
-        btnImprimir.setBounds(70, 80, 130, 30);
+        btnImprimir.setBounds(70, 120, 130, 30);
+        btnImprimir.addActionListener(this);
 
         lbTotal.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lbTotal.setForeground(java.awt.Color.black);
         lbTotal.setText("Total");
         panelPedidoVenta.add(lbTotal);
-        lbTotal.setBounds(30, 20, 50, 30);
+        lbTotal.setBounds(30, 70, 50, 30);
 
         txtTotal.setBackground(java.awt.Color.white);
         txtTotal.setForeground(java.awt.Color.black);
         panelPedidoVenta.add(txtTotal);
-        txtTotal.setBounds(100, 20, 160, 30);
+        txtTotal.setBounds(100, 70, 160, 30);
+        
+        cmbMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Efectivo", "Tarjeta", "Crédito" }));
+        panelPedidoVenta.add(cmbMetodoPago);
+        cmbMetodoPago.setBounds(50, 30, 180, 28);
 
         panelVentas.add(panelPedidoVenta);
-        panelPedidoVenta.setBounds(10, 415, 280, 130);
+        panelPedidoVenta.setBounds(10, 415, 280, 170);
 
         btnCuentaNueva.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         btnCuentaNueva.setText("Cuenta nueva");
@@ -614,28 +623,12 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         tablaProdPedido.setBackground(java.awt.Color.white);
         tablaProdPedido.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         tablaProdPedido.setForeground(java.awt.Color.black);
-        tablaProdPedido.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Descripcion", "Precio", "Peso"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        String [] nombresColumnas = {"Descripcion", "Precio Menudeo","Precio Mayoreo", "Peso"};
+        DefaultTableModel miModeloTabla = new DefaultTableModel(nombresColumnas,0);
+        tablaProdPedido.setModel(miModeloTabla);
         jScrollPane1.setViewportView(tablaProdPedido);
         if (tablaProdPedido.getColumnModel().getColumnCount() > 0) {
-            tablaProdPedido.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tablaProdPedido.getColumnModel().getColumn(0).setPreferredWidth(30);
             tablaProdPedido.getColumnModel().getColumn(1).setPreferredWidth(50);
             tablaProdPedido.getColumnModel().getColumn(2).setPreferredWidth(10);
         }
@@ -647,7 +640,9 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         panelProductosVisual.setBounds(330, 20, 630, 460);
 
         panelPrincipal.add(panelVentas);
-        panelVentas.setBounds(0, 0, 970, 600);
+        tamañoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle r = new Rectangle(tamañoPantalla);
+        panelVentas.setBounds(r);
         //fin de ventas ************************************
         
         //***********************************************************
@@ -726,6 +721,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     		panelProductosRe.setVisible(false);
     		panelEmpleadoRe.setVisible(false);
     		this.jPanelUpdate.setVisible(true);
+    	}
+    	
+    	if(evento.getSource()== this.btnImprimir) {
+    		DefaultTableModel modelo = (DefaultTableModel) this.tablaProdPedido.getModel();
+    		modelo.addRow(new Object[] {this.misProductosVO.get(0).getDescripcion(),""+this.misProductosVO.get(0).getPrecio_menudeo(),""+this.misProductosVO.get(0).getCantidad()});
     	}
     	// cuando registramos un empleado o producto debemos de esconder el formulario de registro
     	// y aparecer el formulario de ventas
