@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.VO.ProductoVO;
 import java.util.ArrayList;
+import java.util.Vector;
+
 import controlador.Coordinador;
 
 public class VentanaPrincipal extends javax.swing.JFrame implements ActionListener{
@@ -87,6 +89,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JComboBox<String> cmbMetodoPago;
+    private javax.swing.JComboBox<String> cmbPrecioVenta;
+    private javax.swing.JLabel lbPrecioVenta;
     //fin de componentes de venta
     //inicio de componentes de modificacion de productos
     private javax.swing.JButton btnActualizar;
@@ -184,6 +188,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProdPedido = new javax.swing.JTable();
         cmbMetodoPago = new javax.swing.JComboBox<>();
+        cmbPrecioVenta = new javax.swing.JComboBox<>();
+        lbPrecioVenta = new javax.swing.JLabel();
         //****************************fin de componentes de la venta
         
         /*Componentes de mi modificacion de productos*/
@@ -545,6 +551,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         btnBuscarProdVentas.setText("Buscar");
         panelProductosBusq.add(btnBuscarProdVentas);
         btnBuscarProdVentas.setBounds(154, 90, 120, 30);
+        this.btnBuscarProdVentas.addActionListener(this);
 
         txtBuscarProd.setBackground(java.awt.Color.white);
         txtBuscarProd.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
@@ -562,25 +569,37 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         lbIngresarPeso.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
         lbIngresarPeso.setForeground(java.awt.Color.black);
         lbIngresarPeso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbIngresarPeso.setText("<html>Ingrese el peso del producto</html>");
+        lbIngresarPeso.setText("<html>Ingrese el peso o cantidad del producto</html>");
         panelProductosBusq.add(lbIngresarPeso);
-        lbIngresarPeso.setBounds(30, 130, 230, 60);
+        lbIngresarPeso.setBounds(30, 200, 230, 60);
+        
+        this.lbPrecioVenta.setFont(new java.awt.Font("Ubuntu", 1, 16));
+        this.lbPrecioVenta.setForeground(java.awt.Color.black);
+        this.lbPrecioVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        this.lbPrecioVenta.setText("Precio");
+        this.panelProductosBusq.add(this.lbPrecioVenta);
+        this.lbPrecioVenta.setBounds(20,165,90,30);
+        
+        cmbPrecioVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Menudeo", "Mayoreo", "Descuento" }));
+        panelProductosBusq.add(cmbPrecioVenta);
+        cmbPrecioVenta.setBounds(100, 165, 150, 30);
 
         txtPeso.setBackground(java.awt.Color.white);
         txtPeso.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         txtPeso.setForeground(java.awt.Color.black);
         panelProductosBusq.add(txtPeso);
-        txtPeso.setBounds(70, 180, 140, 30);
+        txtPeso.setBounds(70, 250, 140, 30);
 
         btnAgregarPeso.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         btnAgregarPeso.setText("Agregar");
         panelProductosBusq.add(btnAgregarPeso);
-        btnAgregarPeso.setBounds(70, 220, 140, 30);
+        btnAgregarPeso.setBounds(70, 300, 140, 30);
+        this.btnAgregarPeso.addActionListener(this);
         panelProductosBusq.add(sepSeparador);
         sepSeparador.setBounds(10, 130, 260, 10);
 
         panelVentas.add(panelProductosBusq);
-        panelProductosBusq.setBounds(10, 10, 280, 260);
+        panelProductosBusq.setBounds(10, 10, 280, 350);
 
         panelPedidoVenta.setBackground(java.awt.Color.lightGray);
         panelPedidoVenta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18), java.awt.Color.black)); // NOI18N
@@ -623,14 +642,16 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         tablaProdPedido.setBackground(java.awt.Color.white);
         tablaProdPedido.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         tablaProdPedido.setForeground(java.awt.Color.black);
-        String [] nombresColumnas = {"Descripcion", "Precio Menudeo","Precio Mayoreo", "Peso"};
+        String [] nombresColumnas = {"Descripcion", "Precio Menudeo","Precio Mayoreo","Precio Descuento", "Peso"};
         DefaultTableModel miModeloTabla = new DefaultTableModel(nombresColumnas,0);
         tablaProdPedido.setModel(miModeloTabla);
         jScrollPane1.setViewportView(tablaProdPedido);
         if (tablaProdPedido.getColumnModel().getColumnCount() > 0) {
             tablaProdPedido.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tablaProdPedido.getColumnModel().getColumn(1).setPreferredWidth(50);
-            tablaProdPedido.getColumnModel().getColumn(2).setPreferredWidth(10);
+            tablaProdPedido.getColumnModel().getColumn(1).setPreferredWidth(30);
+            tablaProdPedido.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tablaProdPedido.getColumnModel().getColumn(3).setPreferredWidth(30);
+            tablaProdPedido.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
 
         panelProductosVisual.add(jScrollPane1);
@@ -723,9 +744,44 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     		this.jPanelUpdate.setVisible(true);
     	}
     	
+    	if(evento.getSource() == this.btnBuscarProdVentas) {
+    		if(coordinador.validarCampos(this.txtBuscarProd.getText())) {
+    			JOptionPane.showMessageDialog(null, "¡Ingrese un ID!\nEsta vacio el campo");
+    		}else {
+    			int id = Integer.parseInt(this.txtBuscarProd.getText());
+    			ProductoVO miProductoVO = this.busquedaProd(id);
+    			if(miProductoVO == null) {
+    				JOptionPane.showMessageDialog(null, "¡No existe el producto buscado!");
+    			}else {
+    				coordinador.setProductoVenta(miProductoVO);
+    				limpiarCampos(5);
+    				JOptionPane.showMessageDialog(null, "¡Producto listo para agregar!");
+    			}
+    		}
+    	}
+    	
+    	if(evento.getSource() == this.btnAgregarPeso) {
+    		if(coordinador.getProductoVenta() == null) {
+    			JOptionPane.showMessageDialog(null, "¡No ha buscado un producto antes!");
+    		}else {
+    			if(coordinador.validarCampos(this.txtPeso.getText())) {
+    				JOptionPane.showMessageDialog(null, "¡Ingrese el peso o cantidad del producto!\nEsta vacio el campo");
+    			}else {
+    				if(this.cmbPrecioVenta.getSelectedIndex() == 0) {
+    					JOptionPane.showMessageDialog(null, "¡Seleccione un precio!");
+    				}else {
+    					//aqui ya podemos insertar a la tabla
+    					DefaultTableModel modelo = (DefaultTableModel) this.tablaProdPedido.getModel();
+    					insertarProductoVentaTabla(modelo,coordinador.getProductoVenta(),this.txtPeso.getText());
+    					calcularTotal(modelo);
+    					limpiarCampos(6);
+    				}
+    			}
+    		}
+    	}
+    	
     	if(evento.getSource()== this.btnImprimir) {
-    		DefaultTableModel modelo = (DefaultTableModel) this.tablaProdPedido.getModel();
-    		modelo.addRow(new Object[] {this.misProductosVO.get(0).getDescripcion(),""+this.misProductosVO.get(0).getPrecio_menudeo(),""+this.misProductosVO.get(0).getCantidad()});
+    		
     	}
     	// cuando registramos un empleado o producto debemos de esconder el formulario de registro
     	// y aparecer el formulario de ventas
@@ -953,6 +1009,50 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     			this.rbInactivo.setSelected(false);
     			break;
     		}
+    		case 5:{
+    			this.txtBuscarProd.setText("");
+    			break;
+    		}
+    		case 6:{
+    			this.txtPeso.setText("");
+    			this.cmbPrecioVenta.setSelectedIndex(0);
+    		}
+    	}
+    }
+    
+    public void calcularTotal(DefaultTableModel modelo){
+    	float total= 0;
+    	float precio = 0;
+    	float peso = 0;
+    	int filas = modelo.getRowCount();
+    	int columnas = modelo.getColumnCount();
+    	Vector<Vector> datosTabla = modelo.getDataVector();
+    	Vector<Vector> datosLimpios = null;
+    	int filaSeleccionada = this.tablaProdPedido.getSelectedRow();
+    	//limpiamos los datos
+    	for(int i = 0;i<filas;i++) {
+    		for(int j = 1;j<columnas-1;j++) {
+    			peso = Float.parseFloat(datosTabla.get(i).get(columnas-1).toString());
+    			if(datosTabla.get(i).get(j).equals("-")) {
+    				
+    			}else {
+    				precio = Float.parseFloat(datosTabla.get(i).get(j).toString()) * peso; 
+    			}
+    		}
+    		total = total + precio;
+    	}
+    	System.out.println("Total: " + total);
+    }
+    
+    public void insertarProductoVentaTabla(DefaultTableModel modelo, ProductoVO miProductoVO,String cantidad) {
+    	if(this.cmbPrecioVenta.getSelectedIndex()== 1) {
+    		modelo.addRow(new Object[] {miProductoVO.getDescripcion(),miProductoVO.getPrecio_menudeo()+"","-","-",cantidad});
+    	}
+    	if(this.cmbPrecioVenta.getSelectedIndex() == 2) {
+    		modelo.addRow(new Object[] {miProductoVO.getDescripcion(),"-",miProductoVO.getPrecio_mayoreo()+"","-",cantidad});
+    	}
+    	if(this.cmbPrecioVenta.getSelectedIndex() == 3) {
+    		modelo.addRow(new Object[] {miProductoVO.getDescripcion(),"-","-",miProductoVO.getDescuento()+"",cantidad});
     	}
     }
 

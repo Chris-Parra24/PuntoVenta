@@ -14,6 +14,7 @@ public class Coordinador {
 	private PersonalVO miPersonalVO;
 	private ProductoDAO miProductoDAO;
 	private ArrayList<ProductoVO> misProductosVO;
+	private ProductoVO miProductoVenta = null;
 	//constructor
 	
 	//metodos distintos del getter and setter
@@ -116,5 +117,11 @@ public class Coordinador {
 	public ArrayList<ProductoVO> getProductosVO() {
 		buscarProductos();
 		return this.misProductosVO;
+	}
+	public void setProductoVenta(ProductoVO productoBuscadoVenta) {
+		this.miProductoVenta = productoBuscadoVenta;
+	}
+	public ProductoVO getProductoVenta() {
+		return this.miProductoVenta;
 	}
 }
