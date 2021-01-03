@@ -1,6 +1,7 @@
 package modelo;
 
 import controlador.Coordinador;
+import java.util.ArrayList;
 
 public class Logica {
 	//atributos
@@ -86,6 +87,14 @@ public class Logica {
 		return Float.parseFloat(numero);
 	}
 	
+	public float calcularTotalVenta(ArrayList<Producto> miLista) {
+		float total = 0;
+		for(int i = 0 ;i<miLista.size(); i++) {
+			total = total + miLista.get(i).getTotal();
+		}
+		total = (float) (Math.round(total*100d)/100d);
+		return total;
+	}
 	
 	//setter and getter
 	public void setCoordinador(Coordinador coordinador) {

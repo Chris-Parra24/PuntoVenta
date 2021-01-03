@@ -1,12 +1,15 @@
 package controlador;
 import vista.*;
+import modelo.Producto;
 import modelo.Logica;
 import modelo.DAO.*;
 import modelo.VO.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Coordinador {
 	//atributos
+	private VentasDAO miVentasDAO;
 	private VentanaLogin miVentanaLogin;
 	private VentanaPrincipal miVentanaPrincipal;
 	private Logica miLogica;
@@ -15,6 +18,7 @@ public class Coordinador {
 	private ProductoDAO miProductoDAO;
 	private ArrayList<ProductoVO> misProductosVO;
 	private ProductoVO miProductoVenta = null;
+	private ArrayList<Producto> misProductosVenta = new ArrayList<Producto>();
 	//constructor
 	
 	//metodos distintos del getter and setter
@@ -59,6 +63,38 @@ public class Coordinador {
 		
 	}
 	
+	public void agregarProductoVentaLista(ProductoVO miProducto,String peso,int seleccionPrecio) {
+		if(seleccionPrecio == 1) {
+			Producto prodVenta = new Producto(miProducto.getId_producto(),miProducto.getDescripcion(),miProducto.getPrecio_menudeo(),Float.parseFloat(peso));
+			this.misProductosVenta.add(prodVenta);
+		}
+		if(seleccionPrecio == 2) {
+			Producto prodVenta = new Producto(miProducto.getId_producto(),miProducto.getDescripcion(),miProducto.getPrecio_mayoreo(),Float.parseFloat(peso));
+			this.misProductosVenta.add(prodVenta);
+		}
+		if(seleccionPrecio == 3) {
+			Producto prodVenta = new Producto(miProducto.getId_producto(),miProducto.getDescripcion(),miProducto.getDescuento(),Float.parseFloat(peso));
+			this.misProductosVenta.add(prodVenta);
+		}
+		
+	}
+	
+	public boolean isProductoVentaEmpty() {
+		return this.misProductosVenta.isEmpty();
+	}
+	
+	public void borrarProductoVentaLista(int index) {
+		this.misProductosVenta.remove(index);
+	}
+	
+	public float calcularTotalVenta() {
+		return this.miLogica.calcularTotalVenta(this.misProductosVenta);
+	}
+	
+	public void limpiarProductosVentaLista() {
+		this.misProductosVenta.clear();
+	}
+	
 	public boolean insertarProducto(String descripcion, String precioMenudeo, String precioMayoreo, String unidad,int departamento, String descuento, boolean status) {
 		//cambiamos los precios , el descuento a flotante
 		float precioMen = miLogica.convertirFloat(precioMenudeo);
@@ -80,7 +116,20 @@ public class Coordinador {
 		return miLogica.isVacio(cadena);
 	}
 	
+	public boolean insertarVenta(String metodo_pago,float total,boolean status,int idPersonal) {
+		return this.miVentasDAO.insertarVenta(metodo_pago, total, status, idPersonal);
+	}
 	
+	public int ultimaVenta() {
+		return this.miVentasDAO.ultimaVenta();
+	}
+	
+	public void insertarPedido(int id_venta) {
+		Detalle_VentaDAO miDetalle = new Detalle_VentaDAO();
+		for(int i = 0;i<this.misProductosVenta.size();i++) {
+			miDetalle.insertarPedido(this.misProductosVenta.get(i), id_venta);
+		}
+	}
 	
 	//funcion que nos valida los campos de un formulario
 	public boolean validarCampos(String nombre, String password, String paterno, String materno, String telefono,String rol) {
@@ -114,6 +163,9 @@ public class Coordinador {
 	public void setProductoDAO(ProductoDAO miProductoDAO) {
 		this.miProductoDAO = miProductoDAO;
 	}
+	public void setVentasDAO(VentasDAO miVentasDAO) {
+		this.miVentasDAO = miVentasDAO;
+	}
 	public ArrayList<ProductoVO> getProductosVO() {
 		buscarProductos();
 		return this.misProductosVO;
@@ -123,5 +175,8 @@ public class Coordinador {
 	}
 	public ProductoVO getProductoVenta() {
 		return this.miProductoVenta;
+	}
+	public ArrayList<Producto> getProductosVentaLista() {
+		return this.misProductosVenta;
 	}
 }

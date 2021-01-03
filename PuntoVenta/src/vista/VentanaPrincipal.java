@@ -11,7 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.VO.ProductoVO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
+import java.math.*;
+import java.text.SimpleDateFormat;
 
 import controlador.Coordinador;
 
@@ -91,6 +94,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JComboBox<String> cmbMetodoPago;
     private javax.swing.JComboBox<String> cmbPrecioVenta;
     private javax.swing.JLabel lbPrecioVenta;
+    private javax.swing.JButton btnBorrarProducto;
     //fin de componentes de venta
     //inicio de componentes de modificacion de productos
     private javax.swing.JButton btnActualizar;
@@ -108,6 +112,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JTextField txtIdentificador1;
     private javax.swing.JTextField txtIdentificador2;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtPrecioDescuentoM;
+    private javax.swing.JTextField txtPrecioMayo;
+    private javax.swing.JLabel lbPrecioDescuentoM;
+    private javax.swing.JLabel lbPrecioMayo;
     //fin de componentnes de modificacion de productos
     
     
@@ -190,6 +198,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         cmbMetodoPago = new javax.swing.JComboBox<>();
         cmbPrecioVenta = new javax.swing.JComboBox<>();
         lbPrecioVenta = new javax.swing.JLabel();
+        btnBorrarProducto = new javax.swing.JButton();
         //****************************fin de componentes de la venta
         
         /*Componentes de mi modificacion de productos*/
@@ -208,6 +217,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         lbIdentificador = new javax.swing.JLabel();
         txtIdentificador2 = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
+        lbPrecioMayo = new javax.swing.JLabel();
+        txtPrecioMayo = new javax.swing.JTextField();
+        lbPrecioDescuentoM = new javax.swing.JLabel();
+        txtPrecioDescuentoM = new javax.swing.JTextField();
         //fin de componentes de modificacion de productos
         
         //Cosas de mis ventana y del panel principal*******************************
@@ -504,13 +517,13 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         rbActivo.setForeground(java.awt.Color.black);
         rbActivo.setText("Activo");
         jPanelUpdate.add(rbActivo);
-        rbActivo.setBounds(160, 330, 80, 23);
+        rbActivo.setBounds(150, 390, 80, 23);
 
         rbInactivo.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         rbInactivo.setForeground(java.awt.Color.black);
         rbInactivo.setText("Inactivo");
         jPanelUpdate.add(rbInactivo);
-        rbInactivo.setBounds(380, 330, 90, 23);
+        rbInactivo.setBounds(370, 390, 90, 23);
 
         lbIdentificador.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         lbIdentificador.setForeground(java.awt.Color.black);
@@ -529,11 +542,34 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         btnActualizar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         btnActualizar.setText("Actualizar");
         jPanelUpdate.add(btnActualizar);
-        btnActualizar.setBounds(220, 380, 180, 35);
+        btnActualizar.setBounds(220, 430, 180, 35);
         btnActualizar.addActionListener(this);
         
+        lbPrecioMayo.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        lbPrecioMayo.setForeground(java.awt.Color.black);
+        lbPrecioMayo.setText("Precio Mayoreo");
+        jPanelUpdate.add(lbPrecioMayo);
+        lbPrecioMayo.setBounds(155, 315, 120, 19);
+
+        txtPrecioMayo.setBackground(java.awt.Color.white);
+        txtPrecioMayo.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtPrecioMayo.setForeground(java.awt.Color.black);        
+        jPanelUpdate.add(txtPrecioMayo);
+        txtPrecioMayo.setBounds(290, 310, 200, 30);
+
+        lbPrecioDescuentoM.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        lbPrecioDescuentoM.setForeground(java.awt.Color.black);
+        lbPrecioDescuentoM.setText("Precio Descuento");
+        jPanelUpdate.add(lbPrecioDescuentoM);
+        lbPrecioDescuentoM.setBounds(155, 355, 130, 19);
+
+        txtPrecioDescuentoM.setBackground(java.awt.Color.white);
+        txtPrecioDescuentoM.setForeground(java.awt.Color.black);
+        jPanelUpdate.add(txtPrecioDescuentoM);
+        txtPrecioDescuentoM.setBounds(290, 350, 200, 30);
+        
         this.panelPrincipal.add(this.jPanelUpdate);
-        this.jPanelUpdate.setBounds(200,200,660,440);
+        this.jPanelUpdate.setBounds(200,200,660,470);
         this.jPanelUpdate.setVisible(false);
         
         /*Fin de componentes de modificacion*/
@@ -621,6 +657,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         txtTotal.setForeground(java.awt.Color.black);
         panelPedidoVenta.add(txtTotal);
         txtTotal.setBounds(100, 70, 160, 30);
+        this.txtTotal.setText("0.0");
         
         cmbMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Efectivo", "Tarjeta", "Crédito" }));
         panelPedidoVenta.add(cmbMetodoPago);
@@ -633,7 +670,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         btnCuentaNueva.setText("Cuenta nueva");
         btnCuentaNueva.setToolTipText("");
         panelVentas.add(btnCuentaNueva);
-        btnCuentaNueva.setBounds(800, 510, 150, 30);
+        btnCuentaNueva.setBounds(800, 530, 150, 30);
 
         panelProductosVisual.setBackground(java.awt.Color.lightGray);
         panelProductosVisual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -653,12 +690,20 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
             tablaProdPedido.getColumnModel().getColumn(3).setPreferredWidth(30);
             tablaProdPedido.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
+        
+        this.btnBorrarProducto.setFont(new java.awt.Font("Ubuntu", 0, 18));
+        this.btnBorrarProducto.setText("Borrar producto");
+        
 
         panelProductosVisual.add(jScrollPane1);
         jScrollPane1.setBounds(10, 10, 610, 440);
-
+        
+        panelProductosVisual.add(this.btnBorrarProducto);
+        this.btnBorrarProducto.setBounds(450,460,150,30);
+        this.btnBorrarProducto.addActionListener(this);
+        
         panelVentas.add(panelProductosVisual);
-        panelProductosVisual.setBounds(330, 20, 630, 460);
+        panelProductosVisual.setBounds(330, 20, 630, 500);
 
         panelPrincipal.add(panelVentas);
         tamañoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
@@ -773,24 +818,62 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     					//aqui ya podemos insertar a la tabla
     					DefaultTableModel modelo = (DefaultTableModel) this.tablaProdPedido.getModel();
     					insertarProductoVentaTabla(modelo,coordinador.getProductoVenta(),this.txtPeso.getText());
-    					calcularTotal(modelo);
+    					//debemos de agregarlo en una variable que este en el coordinador del pedido actual
+    					coordinador.agregarProductoVentaLista(coordinador.getProductoVenta(), this.txtPeso.getText(), this.cmbPrecioVenta.getSelectedIndex());
+    					//calculamos el total
+    					this.txtTotal.setText(""+coordinador.calcularTotalVenta());
     					limpiarCampos(6);
     				}
     			}
     		}
     	}
     	
-    	if(evento.getSource()== this.btnImprimir) {
-    		
+    	if(evento.getSource() == this.btnBorrarProducto) {
+    		//checamos si algo de la tabla esta seleccionado
+    		if(this.tablaProdPedido.getSelectedRow() == -1 ) {
+    			JOptionPane.showMessageDialog(null, "No se puede borrar si no selecciona\nun producto");
+    		}else {
+    			DefaultTableModel modelo = (DefaultTableModel) this.tablaProdPedido.getModel();
+    			//eliminamos de la lista de productos que tenemos en el coordinador de la venta y le pasamos el index de cual es el elemento que se debe de eliminar
+    			coordinador.borrarProductoVentaLista(this.tablaProdPedido.getSelectedRow());
+    			modelo.removeRow(this.tablaProdPedido.getSelectedRow());
+    			//calculamos el total despues de que se removio
+    			this.txtTotal.setText("" + coordinador.calcularTotalVenta());
+    		}
     	}
-    	// cuando registramos un empleado o producto debemos de esconder el formulario de registro
-    	// y aparecer el formulario de ventas
-    	/*if(evento.getSource() == this.btnRegistroProd || evento.getSource() == this.btnActualizar){
-    		limpiarCampos(1);
-    		this.panelRegistro.setVisible(false);
-    		this.jPanelUpdate.setVisible(false);
-    		this.panelVentas.setVisible(true);
-    	}*/
+    	
+    	if(evento.getSource()== this.btnImprimir) { //insertamos la venta 
+    		if(coordinador.isProductoVentaEmpty()) {
+    			JOptionPane.showMessageDialog(null, "No ha seleccionado nada para vender");
+    		}else {
+    			if(this.cmbMetodoPago.getSelectedIndex() == 0) {
+    				JOptionPane.showMessageDialog(null, "¡Seleccione un metodo de pago!");
+    			}else {
+    				//insertamos primero la venta en tabla ventas para despues obtener el id de la venta
+    				if(coordinador.insertarVenta(this.cmbMetodoPago.getSelectedItem().toString(),coordinador.calcularTotalVenta(),true,coordinador.getPersonalVO().getId_personal()) == false) {
+    					JOptionPane.showMessageDialog(null,"¡No se pudo registrar la venta!");
+    				}else {
+    					//recuperamos la ultima venta (el id) para despues insertar en detalle_venta
+    					int idVenta = coordinador.ultimaVenta();
+    					if(idVenta == -1) {
+    						JOptionPane.showMessageDialog(null, "¡Ocurrio un error al recuperar la ultima venta!");
+    					}else {
+    						coordinador.insertarPedido(idVenta);
+    						//debemos de limpiar los productos que haya en la lista
+    	    				coordinador.limpiarProductosVentaLista();
+    	    				//debemos de limpiar la tabla
+    	    				limpiarTablaVenta();
+    	    				//limpiamos la variable del coordinador de cada producto
+    	    				coordinador.setProductoVenta(null);
+    	    				//ponemos en el campo total
+    	    				this.txtTotal.setText("0.0");
+    					}
+    				}
+    				
+    			}
+    		}
+    	}
+    	
     	
     	if(evento.getSource() == this.btnBuscarProd) {
     		int id;
@@ -808,6 +891,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     				this.txtIdentificador2.setText(""+miProducto.getId_producto());
     				this.txtPrecio.setText("" + miProducto.getPrecio_menudeo());
     				this.txtDescripcion.setText(miProducto.getDescripcion());
+    				this.txtPrecioMayo.setText("" + miProducto.getPrecio_mayoreo());
+    				this.txtPrecioDescuentoM.setText("" + miProducto.getDescuento());
     				if(miProducto.isStatus()) {
     					this.rbActivo.setSelected(true);
     				}else {
@@ -996,6 +1081,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     			this.txtIdentificador2.setText("");
     			this.txtDescripcion.setText("");
     			this.txtPrecio.setText("");
+    			this.txtPrecioDescuentoM.setText("");
+    			this.txtPrecioMayo.setText("");
     			this.rbActivo.setSelected(false);
     			this.rbInactivo.setSelected(false);
     			break;
@@ -1005,6 +1092,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     			this.txtIdentificador2.setText("");
     			this.txtDescripcion.setText("");
     			this.txtPrecio.setText("");
+    			this.txtPrecioDescuentoM.setText("");
+    			this.txtPrecioMayo.setText("");
     			this.rbActivo.setSelected(false);
     			this.rbInactivo.setSelected(false);
     			break;
@@ -1020,29 +1109,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     	}
     }
     
-    public void calcularTotal(DefaultTableModel modelo){
-    	float total= 0;
-    	float precio = 0;
-    	float peso = 0;
-    	int filas = modelo.getRowCount();
-    	int columnas = modelo.getColumnCount();
-    	Vector<Vector> datosTabla = modelo.getDataVector();
-    	Vector<Vector> datosLimpios = null;
-    	int filaSeleccionada = this.tablaProdPedido.getSelectedRow();
-    	//limpiamos los datos
-    	for(int i = 0;i<filas;i++) {
-    		for(int j = 1;j<columnas-1;j++) {
-    			peso = Float.parseFloat(datosTabla.get(i).get(columnas-1).toString());
-    			if(datosTabla.get(i).get(j).equals("-")) {
-    				
-    			}else {
-    				precio = Float.parseFloat(datosTabla.get(i).get(j).toString()) * peso; 
-    			}
-    		}
-    		total = total + precio;
-    	}
-    	System.out.println("Total: " + total);
-    }
+    
     
     public void insertarProductoVentaTabla(DefaultTableModel modelo, ProductoVO miProductoVO,String cantidad) {
     	if(this.cmbPrecioVenta.getSelectedIndex()== 1) {
@@ -1054,6 +1121,12 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     	if(this.cmbPrecioVenta.getSelectedIndex() == 3) {
     		modelo.addRow(new Object[] {miProductoVO.getDescripcion(),"-","-",miProductoVO.getDescuento()+"",cantidad});
     	}
+    }
+    
+    public void limpiarTablaVenta() {
+    	DefaultTableModel modelo = (DefaultTableModel) this.tablaProdPedido.getModel();
+    	modelo.getDataVector().removeAllElements();
+    	this.tablaProdPedido.updateUI();
     }
 
 }
