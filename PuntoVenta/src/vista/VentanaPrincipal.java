@@ -95,6 +95,22 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private javax.swing.JComboBox<String> cmbPrecioVenta;
     private javax.swing.JLabel lbPrecioVenta;
     private javax.swing.JButton btnBorrarProducto;
+    //componentes para clientes para las ventas a credito
+    private javax.swing.JPanel panelDatosCliente;
+    private javax.swing.JPanel panelFormCliente;
+    private javax.swing.JRadioButton rbExisteCliente;
+    private javax.swing.JRadioButton rbNuevoCliente;
+    private javax.swing.JSeparator separadorCliente;
+    private javax.swing.JTextField txtBuscarCliente;
+    private javax.swing.JTextField txtCargoCliente;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtNombreCliente;
+    private javax.swing.JTextField txtTelefonoCliente;
+    private javax.swing.JLabel lbTelefonoCliente;
+    private javax.swing.JLabel lbNombreCliente;
+    private javax.swing.JLabel lbCargoCliente;
+    private javax.swing.JLabel lbIdCliente;
+    private javax.swing.JButton btnBuscarCliente;
     //fin de componentes de venta
     //inicio de componentes de modificacion de productos
     private javax.swing.JButton btnActualizar;
@@ -199,6 +215,22 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         cmbPrecioVenta = new javax.swing.JComboBox<>();
         lbPrecioVenta = new javax.swing.JLabel();
         btnBorrarProducto = new javax.swing.JButton();
+        //formulario pequeño dentro de ventas para los clientes cuando es a credito
+        panelDatosCliente = new javax.swing.JPanel();
+        rbNuevoCliente = new javax.swing.JRadioButton();
+        rbExisteCliente = new javax.swing.JRadioButton();
+        panelFormCliente = new javax.swing.JPanel();
+        txtBuscarCliente = new javax.swing.JTextField();
+        btnBuscarCliente = new javax.swing.JButton();
+        separadorCliente = new javax.swing.JSeparator();
+        lbNombreCliente = new javax.swing.JLabel();
+        lbTelefonoCliente = new javax.swing.JLabel();
+        lbCargoCliente = new javax.swing.JLabel();
+        txtNombreCliente = new javax.swing.JTextField();
+        txtTelefonoCliente = new javax.swing.JTextField();
+        txtCargoCliente = new javax.swing.JTextField();
+        lbIdCliente = new javax.swing.JLabel();
+        txtIdCliente = new javax.swing.JTextField();
         //****************************fin de componentes de la venta
         
         /*Componentes de mi modificacion de productos*/
@@ -704,6 +736,95 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         
         panelVentas.add(panelProductosVisual);
         panelProductosVisual.setBounds(330, 20, 630, 500);
+        
+        panelDatosCliente.setBackground(java.awt.Color.lightGray);
+        panelDatosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Dialog", 1, 16), java.awt.Color.black), "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION)); // NOI18N
+        panelDatosCliente.setLayout(null);
+
+        rbNuevoCliente.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        rbNuevoCliente.setBackground(java.awt.Color.white);
+        rbNuevoCliente.setForeground(java.awt.Color.black);
+        rbNuevoCliente.setText("Nuevo");
+        panelDatosCliente.add(rbNuevoCliente);
+        rbNuevoCliente.setBounds(40, 30, 80, 23);
+
+        rbExisteCliente.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        rbExisteCliente.setBackground(java.awt.Color.white);
+        rbExisteCliente.setForeground(java.awt.Color.black);
+        rbExisteCliente.setText("Existente");
+        panelDatosCliente.add(rbExisteCliente);
+        rbExisteCliente.setBounds(170, 30, 100, 23);
+
+        panelFormCliente.setBackground(java.awt.Color.lightGray);
+        panelFormCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panelFormCliente.setForeground(java.awt.Color.black);
+        panelFormCliente.setLayout(null);
+
+        txtBuscarCliente.setBackground(java.awt.Color.white);
+        txtBuscarCliente.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtBuscarCliente.setForeground(java.awt.Color.black);
+        panelFormCliente.add(txtBuscarCliente);
+        txtBuscarCliente.setBounds(10, 10, 160, 31);
+
+        btnBuscarCliente.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btnBuscarCliente.setText("Buscar");
+        panelFormCliente.add(btnBuscarCliente);
+        btnBuscarCliente.setBounds(180, 8, 90, 35);
+        panelFormCliente.add(separadorCliente);
+        separadorCliente.setBounds(10, 55, 260, 10);
+
+        lbNombreCliente.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        lbNombreCliente.setForeground(java.awt.Color.black);
+        lbNombreCliente.setText("Nombre");
+        panelFormCliente.add(lbNombreCliente);
+        lbNombreCliente.setBounds(20, 80, 70, 19);
+
+        lbTelefonoCliente.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        lbTelefonoCliente.setForeground(java.awt.Color.black);
+        lbTelefonoCliente.setText("Telefono");
+        panelFormCliente.add(lbTelefonoCliente);
+        lbTelefonoCliente.setBounds(20, 120, 70, 19);
+
+        lbCargoCliente.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        lbCargoCliente.setForeground(java.awt.Color.black);
+        lbCargoCliente.setText("Cargo");
+        panelFormCliente.add(lbCargoCliente);
+        lbCargoCliente.setBounds(20, 160, 50, 19);
+
+        txtNombreCliente.setBackground(java.awt.Color.white);
+        txtNombreCliente.setForeground(java.awt.Color.black);
+        panelFormCliente.add(txtNombreCliente);
+        txtNombreCliente.setBounds(100, 75, 150, 30);
+
+        txtTelefonoCliente.setBackground(java.awt.Color.white);
+        txtTelefonoCliente.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtTelefonoCliente.setForeground(java.awt.Color.black);
+        panelFormCliente.add(txtTelefonoCliente);
+        txtTelefonoCliente.setBounds(100, 115, 150, 30);
+
+        txtCargoCliente.setBackground(java.awt.Color.white);
+        txtCargoCliente.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtCargoCliente.setForeground(java.awt.Color.black);
+        panelFormCliente.add(txtCargoCliente);
+        txtCargoCliente.setBounds(100, 155, 150, 30);
+
+        lbIdCliente.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        lbIdCliente.setForeground(java.awt.Color.black);
+        lbIdCliente.setText("ID");
+        panelFormCliente.add(lbIdCliente);
+        lbIdCliente.setBounds(20, 198, 20, 19);
+
+        txtIdCliente.setBackground(java.awt.Color.white);
+        txtIdCliente.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        txtIdCliente.setForeground(java.awt.Color.black);
+        panelFormCliente.add(txtIdCliente);
+        txtIdCliente.setBounds(100, 193, 150, 30);
+
+        panelDatosCliente.add(panelFormCliente);
+        panelFormCliente.setBounds(10, 60, 280, 240);
+
+        panelVentas.add(panelDatosCliente);
+        panelDatosCliente.setBounds(1180, 10, 300, 310);
 
         panelPrincipal.add(panelVentas);
         tamañoPantalla = Toolkit.getDefaultToolkit().getScreenSize();

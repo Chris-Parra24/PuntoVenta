@@ -12,6 +12,7 @@ public class Coordinador {
 	private VentasDAO miVentasDAO;
 	private VentanaLogin miVentanaLogin;
 	private VentanaPrincipal miVentanaPrincipal;
+	private VentanaClienteCredito miVentanaClienteCredito;
 	private Logica miLogica;
 	private PersonalDAO miPersonalDAO;
 	private PersonalVO miPersonalVO;
@@ -165,6 +166,9 @@ public class Coordinador {
 	}
 	public void setVentasDAO(VentasDAO miVentasDAO) {
 		this.miVentasDAO = miVentasDAO;
+	}
+	public void setVentanaClienteCredito(VentanaClienteCredito miVentanaClienteCredito) {
+		this.miVentanaClienteCredito = miVentanaClienteCredito;
 	}
 	public ArrayList<ProductoVO> getProductosVO() {
 		buscarProductos();

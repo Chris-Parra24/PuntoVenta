@@ -1,6 +1,7 @@
 package controlador;
 
 import modelo.Logica;
+import vista.VentanaClienteCredito;
 import vista.VentanaLogin;
 import vista.VentanaPrincipal;
 import modelo.DAO.*;
@@ -15,6 +16,7 @@ public class Aplicacion {
         PersonalDAO miPersonalDAO = new PersonalDAO();
         ProductoDAO miProductoDAO = new ProductoDAO();
         VentasDAO miVentasDAO = new VentasDAO();
+        VentanaClienteCredito miVentanaClienteCredito = new VentanaClienteCredito(miVentanaPrincipal,true);
         
         //hacemos que se relacionen las clases con el coordinador y el coordinador con las clases
         miVentanaPrincipal.setCoordinador(miCoordinador);
@@ -23,7 +25,7 @@ public class Aplicacion {
         miPersonalDAO.setCoordinador(miCoordinador);
         miProductoDAO.setCoordinador(miCoordinador);
         miVentasDAO.setCoordinador(miCoordinador);
-        
+        miVentanaClienteCredito.setCoordinador(miCoordinador);
         
         miCoordinador.setLogica(miLogica);
         miCoordinador.setVentanaLogin(miVentanaLogin);
@@ -31,7 +33,7 @@ public class Aplicacion {
         miCoordinador.setPersonalDAO(miPersonalDAO);
         miCoordinador.setProductoDAO(miProductoDAO);
         miCoordinador.setVentasDAO(miVentasDAO);
-        
+        miCoordinador.setVentanaClienteCredito(miVentanaClienteCredito);
         
         //hacemos visibles nuestras ventanas
         miVentanaPrincipal.setProductosVO(miCoordinador.getProductosVO());
